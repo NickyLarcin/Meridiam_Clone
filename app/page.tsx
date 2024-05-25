@@ -41,18 +41,28 @@ export default function Home() {
   }, [lastScrollY, handleScroll])
 
 
-  const parallaxText1 = useRef(null)
-  const parallaxText2 = useRef(null)
-  const parallaxText3 = useRef(null)
+  const parallaxText1 = useRef<HTMLDivElement>(null);
+  const parallaxText2 = useRef<HTMLDivElement>(null);
+  const parallaxText3 = useRef<HTMLDivElement>(null);
 
 
   useEffect(() => {
 
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      parallaxText1.current.style.transform = `translateY(${scrollTop * -0.2 + 150}px)`;
-      parallaxText2.current.style.transform = `translateY(${scrollTop * -0.2 + 200}px)`;
-      parallaxText3.current.style.transform = `translateY(${scrollTop * -0.2 + 250}px)`;
+
+      if (parallaxText1.current) {
+        parallaxText1.current.style.transform = `translateY(${scrollTop * -0.2 + 150}px)`;
+      }
+
+      if (parallaxText2.current) {
+        parallaxText2.current.style.transform = `translateY(${scrollTop * -0.2 + 200}px)`;
+      }
+
+      if (parallaxText3.current) {
+        parallaxText3.current.style.transform = `translateY(${scrollTop * -0.2 + 250}px)`;
+      }
+
     }
 
 
