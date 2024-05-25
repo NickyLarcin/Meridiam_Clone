@@ -5,7 +5,7 @@ import { Header } from './components/Header'
 import { Footer } from './components/Footer'
 import { Button } from "./components/UI/Button";
 import { IoChevronDown } from "react-icons/io5";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { NewsElement } from "./components/NewsElement";
 
@@ -16,17 +16,18 @@ export default function Home() {
   const [headerIsVisible, setHeaderIsVisible] = useState(true)
   const [aboutUsImage, setAboutUsImage] = useState("/Homepage_2.1.jpg")
 
-  const handleScroll = () => {
-
-    if (typeof window !== 'undefined') {
-      if (window.scrollY > lastScrollY) {
-        setHeaderIsVisible(false)
-      } else (
-        setHeaderIsVisible(true)
-      )
-      setLastScrollY(window.scrollY)
+  const handleScroll = useMemo(() => {
+    return () => {
+      if (typeof window !== 'undefined') {
+        if (window.scrollY > lastScrollY) {
+          setHeaderIsVisible(false)
+        } else {
+          setHeaderIsVisible(true)
+        }
+        setLastScrollY(window.scrollY)
+      }
     }
-  }
+  }, [lastScrollY])
 
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function Home() {
     return () => {
       window.removeEventListener("scroll", handleScroll)
     }
-  }, [lastScrollY])
+  }, [lastScrollY, handleScroll])
 
 
   const parallaxText1 = useRef(null)
@@ -203,7 +204,7 @@ export default function Home() {
             <div className="group relative flex justify-start items-center" onMouseEnter={()=>{handleImageChange("/Homepage_2.3.jpg")}}>
               <div className="relative hover:cursor-pointer">
                 <div className="absolute duration-700 -z-10 inset-0 transition-transform transform scale-y-0 group-hover:scale-y-100 bg-teal-500 origin-bottom w-full h-full"></div>
-                <div className="inline-block text-5xl font-medium text-emerald-950">Our "Impact"</div>
+                <div className="inline-block text-5xl font-medium text-emerald-950">Our Impact</div>
               </div>
             </div>
 
