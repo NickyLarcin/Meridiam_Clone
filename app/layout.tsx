@@ -1,6 +1,34 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import localFont from "next/font/local"
+
+const alaska = localFont({
+  src: [
+
+    {
+      path: "../public/fonts/AlasTrial-Light.otf",
+      weight: "300",
+      style: "normal"
+    },
+    {
+      path: "../public/fonts/AlasTrial-Regular.otf",
+      weight: "400",
+      style: "normal"
+    },
+    {
+      path: "../public/fonts/AlasTrial-Medium.otf",
+      weight: "500",
+      style: "normal"
+    },
+    {
+      path: "../public/fonts/AlasTrial-Bold.otf",
+      weight: "600",
+      style: "normal"
+    },
+
+  ]
+})
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +43,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="scroll-smooth">
+      <body className={`${alaska.className}`}>{children}</body>
     </html>
   );
 }

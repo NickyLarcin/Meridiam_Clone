@@ -15,6 +15,12 @@ const config: Config = {
       },
     },
   },
+  variants: {
+    extend: {
+      // Enable the scroll-smooth utility
+      scrollBehavior: ['responsive'],
+    },
+  },
   plugins: [],
 };
 export default config;
